@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    tools:context="com.patrick.internalexternalstorage.MainActivity">
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message:" />
+
+    <TextView
+        android:id="@+id/tvFilename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FileName:"
+        android:layout_marginTop="50dp" />
+
+    <EditText
+        android:id="@+id/etData"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/tvFilename"
+        android:layout_toRightOf="@+id/tvFilename"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/etFilename"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvFilename"
+        android:layout_toEndOf="@+id/tvFilename"
+        android:layout_toRightOf="@+id/tvFilename"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btnSP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shared Preference"
+        android:layout_below="@+id/tvLabel"
+        android:layout_marginTop="100dp"
+        android:onClick="saveSharedPreference" />
+
+    <Button
+        android:id="@+id/btnIS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Internal Storage"
+        android:layout_below="@+id/btnSP"
+        android:onClick="saveInternalStorage" />
+
+    <Button
+        android:id="@+id/btnIC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Internal Cache"
+        android:layout_below="@+id/btnIS"
+        android:onClick="saveInternalCache" />
+
+    <Button
+        android:id="@+id/btnEC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="External Cache"
+        android:layout_below="@+id/btnIC"
+        android:onClick="saveExternalCache" />
+
+    <Button
+        android:id="@+id/btnES"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="External Storage"
+        android:layout_below="@+id/btnEC"
+        android:onClick="saveExternalStorage" />
+
+    <Button
+        android:id="@+id/btnEPS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="External Public Storage"
+        android:layout_below="@+id/btnES"
+        android:onClick="saveExternalPublic" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_below="@+id/btnEPS"
+        android:onClick="next" />
+
+
+</RelativeLayout>
