@@ -22,17 +22,15 @@ import java.io.InputStreamReader;
 public class SecondActivity extends AppCompatActivity {
 
     TextView tv_Data;
+    Button btn_Shared, btn_IS, btn_IC, btn_EC, btn_ES, btn_EPS, btn_Next;
     FileInputStream fis;
     BufferedReader br;
-    Button btn_Shared, btn_IS, btn_IC, btn_EC, btn_ES, btn_EPS, btn_Next;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        tv_Data = findViewById(R.id.tvData);
         btn_Shared = findViewById(R.id.btnSP);
         btn_IS = findViewById(R.id.btnIS);
         btn_IC = findViewById(R.id.btnIC);
@@ -40,6 +38,7 @@ public class SecondActivity extends AppCompatActivity {
         btn_ES = findViewById(R.id.btnES);
         btn_EPS = findViewById(R.id.btnEPS);
         btn_Next = findViewById(R.id.btnNext);
+        tv_Data = findViewById(R.id.tvData);
 
     }
 
@@ -50,111 +49,106 @@ public class SecondActivity extends AppCompatActivity {
 
     public void loadSharedPreference(View view) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());;
-        String data = preferences.getString("data","");
-        tv_Data.setText(data);
+        String message = preferences.getString("data","");
+        tv_Data.setText(message);
     }
 
-    public void loadInternalStorage (View view) throws IOException {
+    public void loadInternalStorage (View view) {
         Intent intent = getIntent();
         String filename = intent.getStringExtra("filename");
-        String newline = "";
-        String data = "";
+        String read, message = "";
         try{
             fis = openFileInput(filename+".txt");
             br = new BufferedReader(new InputStreamReader(fis));
-            if ((newline = br.readLine()) != null)
-                data = newline;
+            if ((read = br.readLine()) != null)
+                message = read;
             fis.close();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
         }
-        tv_Data.setText(data);
+        tv_Data.setText(message);
     }
 
-    public void loadInternalCache(View view) throws FileNotFoundException {
+    public void loadInternalCache(View view) {
         Intent intent = getIntent();
         String filename = intent.getStringExtra("filename");
-        String newline = "";
-        String data = "";
+        String read, message = "";
         File folder = getCacheDir();
         File file = new File(folder, filename+".txt");
-        fis = new FileInputStream(file);
         try{
+            fis = new FileInputStream(file);
             br = new BufferedReader(new InputStreamReader(fis));
-            if ((newline = br.readLine()) != null)
-                data = newline;
+            if ((read = br.readLine()) != null)
+                message = read;
             fis.close();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
         }
-        tv_Data.setText(data);
+        tv_Data.setText(message);
     }
 
-    public void loadExternalCache(View view) throws FileNotFoundException {
+    public void loadExternalCache(View view) {
         Intent intent = getIntent();
         String filename = intent.getStringExtra("filename");
-        String newline = "";
-        String data = "";
+        String read, message = "";
         File folder = getExternalCacheDir();
         File file = new File(folder, filename+".txt");
-        fis = new FileInputStream(file);
         try{
+            fis = new FileInputStream(file);
             br = new BufferedReader(new InputStreamReader(fis));
-            if ((newline = br.readLine()) != null)
-                data = newline;
+            if ((read = br.readLine()) != null)
+                message = read;
             fis.close();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
         }
-        tv_Data.setText(data);
+        tv_Data.setText(message);
     }
 
-    public void loadExternalStorage (View view) throws FileNotFoundException {
+    public void loadExternalStorage (View view) {
         Intent intent = getIntent();
         String filename = intent.getStringExtra("filename");
-        String newline = "";
-        String data = "";
+        String read, message = "";
         File folder = getExternalFilesDir("Patrick");
         File file = new File(folder, filename+".txt");
-        fis = new FileInputStream(file);
         try{
+            fis = new FileInputStream(file);
             br = new BufferedReader(new InputStreamReader(fis));
-            if ((newline = br.readLine()) != null)
-                data = newline;
+            if ((read = br.readLine()) != null)
+                message = read;
             fis.close();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
         }
-        tv_Data.setText(data);
+        tv_Data.setText(message);
     }
 
-    public void loadExternalPublic (View view) throws FileNotFoundException {
+    public void loadExternalPublic (View view) {
         Intent intent = getIntent();
         String filename = intent.getStringExtra("filename");
-        String newline = "";
-        String data = "";
+        String read, message = "";
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         File file = new File (folder, filename+".txt");
-        fis = new FileInputStream(file);
         try{
+            fis = new FileInputStream(file);
             br = new BufferedReader(new InputStreamReader(fis));
-            if ((newline = br.readLine()) != null)
-                data = newline;
+            if ((read = br.readLine()) != null)
+                message = read;
             fis.close();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
         }
-        tv_Data.setText(data);
+        tv_Data.setText(message);
 
     }
 }
