@@ -3,6 +3,7 @@ package com.patrick.internalexternalstorage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,8 +41,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void next (View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
         startActivity(intent);
+    }
+
+    private void writeData(File file, String message){
+        fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            fos.write(message.getBytes());
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void saveSharedPreference (View view) {
@@ -76,5 +95,35 @@ public class MainActivity extends AppCompatActivity {
         String filename = et_Filename.getText().toString();
         File folder = getCacheDir();
         File file = new File(folder, filename + ".txt");
+        String message = et_Data.getText().toString();
+        writeData(file, message);
+        Toast.makeText(this,"Successfully writtin to internal cache!", Toast.LENGTH_LONG).show();
+    }
+
+    public void saveExternalCache (View view) {
+        String filename = et_Filename.getText().toString();
+        File folder = getExternalCacheDir();
+        File file = new File(folder, filename + ".txt");
+        String message = et_Data.getText().toString();
+        writeData(file, message);
+        Toast.makeText(this, "Successfully written to external cache!", Toast.LENGTH_LONG).show();
+    }
+
+    public void saveExternalStorage (View view) {
+        String filename = et_Filename.getText().toString();
+        File folder = getExternalFilesDir("Patrick");
+        File file = new File(folder, filename + ".txt");
+        String message = et_Data.getText().toString();
+        writeData(file, message);
+        Toast.makeText(this, "Successfully written to external storage!", Toast.LENGTH_LONG).show();
+    }
+
+    public void saveExternalPublic (View view) {
+        String filename = et_Filename.getText().toString();
+        File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File file = new File (folder, filename + ".txt");
+        String message = et_Data.getText().toString();
+        writeData(file, message);
+        Toast.makeText(this, "Successfully written to external public storage!", Toast.LENGTH_LONG).show();
     }
 }
