@@ -55,10 +55,12 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void loadInternalStorage (View view) throws IOException {
+        Intent intent = getIntent();
+        String filename = intent.getStringExtra("filename");
         String newline = "";
         String data = "";
         try{
-            fis = openFileInput("storage.txt");
+            fis = openFileInput(filename+".txt");
             br = new BufferedReader(new InputStreamReader(fis));
             if ((newline = br.readLine()) != null)
                 data = newline;
@@ -72,10 +74,12 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void loadInternalCache(View view) throws FileNotFoundException {
+        Intent intent = getIntent();
+        String filename = intent.getStringExtra("filename");
         String newline = "";
         String data = "";
         File folder = getCacheDir();
-        File file = new File(folder, "storage.txt");
+        File file = new File(folder, filename+".txt");
         fis = new FileInputStream(file);
         try{
             br = new BufferedReader(new InputStreamReader(fis));
@@ -91,10 +95,12 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void loadExternalCache(View view) throws FileNotFoundException {
+        Intent intent = getIntent();
+        String filename = intent.getStringExtra("filename");
         String newline = "";
         String data = "";
         File folder = getExternalCacheDir();
-        File file = new File(folder, "storage.txt");
+        File file = new File(folder, filename+".txt");
         fis = new FileInputStream(file);
         try{
             br = new BufferedReader(new InputStreamReader(fis));
@@ -110,10 +116,12 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void loadExternalStorage (View view) throws FileNotFoundException {
+        Intent intent = getIntent();
+        String filename = intent.getStringExtra("filename");
         String newline = "";
         String data = "";
         File folder = getExternalFilesDir("Patrick");
-        File file = new File(folder, "storage.txt");
+        File file = new File(folder, filename+".txt");
         fis = new FileInputStream(file);
         try{
             br = new BufferedReader(new InputStreamReader(fis));
@@ -129,10 +137,12 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void loadExternalPublic (View view) throws FileNotFoundException {
+        Intent intent = getIntent();
+        String filename = intent.getStringExtra("filename");
         String newline = "";
         String data = "";
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        File file = new File (folder, "storage.txt");
+        File file = new File (folder, filename+".txt");
         fis = new FileInputStream(file);
         try{
             br = new BufferedReader(new InputStreamReader(fis));

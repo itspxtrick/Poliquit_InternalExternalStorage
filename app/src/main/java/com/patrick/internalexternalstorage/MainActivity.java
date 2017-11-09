@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void next (View view) {
         Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+        intent.putExtra("filename", et_Filename.getText().toString());
         startActivity(intent);
     }
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("data", et_Data.getText().toString());
         editor.commit();
-        Toast.makeText(this, "Preferences Saved!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Successfully written Preferences!", Toast.LENGTH_SHORT).show();
     }
 
     public void saveInternalStorage (View view) {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        Toast.makeText(this, "Storage saved!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Successfully written internal storage!", Toast.LENGTH_SHORT).show();
     }
 
     public void saveInternalCache(View view){
